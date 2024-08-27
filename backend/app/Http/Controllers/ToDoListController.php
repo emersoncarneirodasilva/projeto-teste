@@ -12,9 +12,12 @@ class ToDoListController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    private $registers = [];
+
+    public function index(Request $request)
     {
-        $objetos = ToDoList::paginate();
+        \Log::info($request->offset);
+        $objetos = ToDoList::paginate($request->offset);
         
         return ToDoListResource::collection($objetos);
     }
@@ -32,11 +35,19 @@ class ToDoListController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        
+        $list = $request->all();
 
-        $register = ToDoList::create($data);
+        foreach($list['tarefas'] as $object){
+            
+            $array['task'] = $object['task'];
+            $array['isCompleted'] = $object['isCompleted'];
 
-        return new ToDoListResource($register);
+            $this->registers[] = ToDoLIst::create($array);
+        }
+
+        \Log::info($this->registers);
+        //return new ToDoListResource($registers);
     }
 
     /**

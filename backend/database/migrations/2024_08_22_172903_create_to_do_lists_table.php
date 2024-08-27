@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('to_do_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('tarefa', '255');
+            $table->string('task', '255');
             $table->boolean('isCompleted');
             $table->timestamps();
         });

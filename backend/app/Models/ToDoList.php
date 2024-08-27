@@ -13,7 +13,7 @@ class ToDoList extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'tarefa',
+        'task',
         'isCompleted'
     ];
 }
